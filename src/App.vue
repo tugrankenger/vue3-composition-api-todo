@@ -1,21 +1,48 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <div class="container">
+    <ul class="list-group bg-light d-flex gap-5 p-2 m-2 align-items-center justify-content-center flex-row">
+      <li class="list-group-item border-0 rounded-0 bg-transparent">
+        <router-link :to="{name:'homePage'}" class="btn border text-decoration-none" active-class="bg-primary text-white">Todo</router-link>
+      </li>
+      <li class="list-group-item border-0 rounded-0 bg-transparent">
+        <router-link :to="{name:'completedPage'}" class="btn border text-decoration-none" active-class="bg-primary text-white">Completed</router-link>
+      </li>
+    </ul>
+    <router-view @add-todo="addTodo" :todos="state.todos"  />
+  </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<script setup>
+import New from "./components/New.vue"
+import Todo from "./components/Todo.vue"
+import Completed from "./components/Completed.vue"
+import { reactive } from "@vue/reactivity"
+
+const state = reactive({
+  todos:[
+    {
+      id:1,
+      title:"Go to the gym",
+      completed: false
+    },
+    {
+      id:2,
+      title:"Go to swimming",
+      completed: false
+    },
+    {
+      id:3,
+      title:"Pay the bills",
+      completed: false
+    }
+  ]
+})
+
+const addTodo =(title) =>{
+  state.todos.push({
+    id:state.todos.length+1,
+    title:title,
+    completed:false
+  })
 }
-</style>
+</script>
