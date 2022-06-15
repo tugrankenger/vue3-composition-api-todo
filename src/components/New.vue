@@ -1,6 +1,9 @@
 <template>
     <div class="container">
-        <input type="text" @keydown.enter="addTodo">
+        <div class="d-flex align-items-center gap-3 my-3">
+            <label for="">Add Todo:</label>
+            <input type="text" @keydown.enter="addTodo">
+        </div>
     </div>
 </template>
 

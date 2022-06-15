@@ -8,39 +8,42 @@
         <router-link :to="{name:'completedPage'}" class="btn border text-decoration-none" active-class="bg-primary text-white">Completed</router-link>
       </li>
     </ul>
-    <router-view @add-todo="addTodo" :todos="state.todos"  />
+    <router-view @add-todo="addTodo" :todos="todosStore.todos"  />
   </div>
 </template>
 
 <script setup>
-import New from "./components/New.vue"
-import Todo from "./components/Todo.vue"
-import Completed from "./components/Completed.vue"
-import { reactive } from "@vue/reactivity"
+// import New from "./components/New.vue"
+// import Todo from "./components/Todo.vue"
+// import Completed from "./components/Completed.vue"
+// import { reactive } from "@vue/reactivity"
+import {todos} from "./stores/todos"
 
-const state = reactive({
-  todos:[
-    {
-      id:1,
-      title:"Go to the gym",
-      completed: false
-    },
-    {
-      id:2,
-      title:"Go to swimming",
-      completed: false
-    },
-    {
-      id:3,
-      title:"Pay the bills",
-      completed: false
-    }
-  ]
-})
+const todosStore = todos();
+
+// const state = reactive({
+//   todos:[
+//     {
+//       id:1,
+//       title:"Go to the gym",
+//       completed: false
+//     },
+//     {
+//       id:2,
+//       title:"Go to swimming",
+//       completed: false
+//     },
+//     {
+//       id:3,
+//       title:"Pay the bills",
+//       completed: false
+//     }
+//   ]
+// })
 
 const addTodo =(title) =>{
-  state.todos.push({
-    id:state.todos.length+1,
+  todosStore.todos.push({
+    id:todosStore.todos.length+1,
     title:title,
     completed:false
   })

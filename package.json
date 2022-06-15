@@ -8,11 +8,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "pinia": "^2.0.14",
     "vue": "^3.2.25",
     "vue-router": "^4.0.16"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",
-    "vite": "^2.9.9"
+    "eslint": "^8.17.0",
+    "eslint-plugin-vue": "^9.1.1",
+    "vite": "^2.9.9",
+    "vite-plugin-eslint": "^1.6.1"
   }
 }
