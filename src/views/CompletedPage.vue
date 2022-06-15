@@ -2,7 +2,7 @@
     <div class="container">
         <h3>completed</h3>
         <ul class="list-group">
-            <li v-for="todo in completed" :key="todo.id" class="list-group-item">
+            <li v-for="todo in completedTrue()" :key="todo.id" class="list-group-item">
                 <input type="checkbox" v-model="todo.completed">
                 {{todo.title}}
             </li>
@@ -17,9 +17,7 @@
         todos: Array
     })
 
-    const completed = computed(()=>{
-        return props.todos.filter((item)=>{
-            item.completed
-        })
-    })
+    const completedTrue =()=>{
+        return props.todos.filter((item)=> item.completed)
+    }
 </script>

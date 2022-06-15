@@ -1,11 +1,20 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import Home from './views/HomePage.vue'
 
+//TODO eslint kurulacak
+
 const routes = [
     {
         name: 'homePage',
         path:'/',
-        component: Home
+        component: Home,
+        children: [
+            {
+                name: 'todoDetail',
+                path: 'detail/:id',
+                component: () => import('./components/Detail.vue')
+            }
+        ]
     },
     {
         name:'completedPage',
