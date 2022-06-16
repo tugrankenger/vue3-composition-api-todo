@@ -8,6 +8,7 @@ const routes = [
         name: 'homePage',
         path:'/',
         component: Home,
+
         children: [
             {
                 name: 'todoDetail',

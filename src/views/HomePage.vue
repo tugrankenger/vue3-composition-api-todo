@@ -11,11 +11,16 @@
                     <input type="checkbox" v-model="todo.completed">
                     {{ todo.title }}
                 </div>
-                <button @click="onDetail(todo.id, todo.title)" class="btn btn-primary">Detail</button>
+                <button @click="onDetail(todo.id)" class="btn btn-primary">Detail</button>
             </li>
         </ul>
+        <div class="completedInfo d-flex align-items center justify-content-between mx-1 my-2">
+            <router-link :to="{ name: 'completedPage' }"><span class="text-primary">Completed items counts:
+                    {{ props.completed }}</span>
+            </router-link>
+            <span class="text-danger">Uncompleted item count: {{ props.unCompleted }}</span>
+        </div>
         <div class="todo-detail my-3">
-            <h3>Details:</h3>
             <router-view />
         </div>
     </div>
@@ -25,14 +30,16 @@
 import New from '../components/New.vue'
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { todos } from "../stores/todos"
+
+const props = defineProps({
+    completed: Number,
+    unCompleted: Number
+})
 
 const router = useRouter()
 
-import {todos} from "../stores/todos"
-
 const todosStore = todos();
-
-console.log(todosStore.todos)
 
 const emit = defineEmits(['addTodo']);
 

@@ -31,7 +31,7 @@ export const todos = defineStore("todos", {
                 title: title,
                 completed: false
             })
-        },
+        }
     },
     // actions ekle push islemleri icin
 });
