@@ -5,7 +5,7 @@
         </div>
         <h3>Todos:</h3>
         <ul class="list-group">
-            <li v-for="todo in todos" :key="todo.id"
+            <li v-for="todo in todosFilter" :key="todo.id"
                 class="list-group-item d-flex justify-content-between align-items-center">
                 <div>
                     <input type="checkbox" v-model="todo.completed">
@@ -16,7 +16,7 @@
         </ul>
         <div class="todo-detail my-3">
             <h3>Details:</h3>
-            <router-view :todos="props.todos" />
+            <router-view />
         </div>
     </div>
 </template>
@@ -28,15 +28,17 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
-const props = defineProps({
-    todos: Array
-})
+import {todos} from "../stores/todos"
+
+const todosStore = todos();
+
+console.log(todosStore.todos)
 
 const emit = defineEmits(['addTodo']);
 
-const todos = computed(() => {
+const todosFilter = computed(() => {
     let completed = []
-    props.todos.filter((item) => {
+    todosStore.todos.filter((item) => {
         if (!item.completed) {
             completed.push(item)
         }

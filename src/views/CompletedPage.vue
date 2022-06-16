@@ -12,11 +12,11 @@
 
 <script setup>
 
-    const props = defineProps({
-        todos: Array
-    })
+    import {todos} from "./stores/todos"
+
+const todosStore = todos();
 
     const completedTrue =()=>{
-        return props.todos.filter((item)=> item.completed)
+        return todosStore.filter((item)=> item.completed)
     }
 </script>

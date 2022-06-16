@@ -8,7 +8,7 @@
         <router-link :to="{name:'completedPage'}" class="btn border text-decoration-none" active-class="bg-primary text-white">Completed</router-link>
       </li>
     </ul>
-    <router-view @add-todo="addTodo" :todos="todosStore.todos"  />
+    <router-view @add-todo="addTodo"  />
   </div>
 </template>
 
@@ -42,10 +42,6 @@ const todosStore = todos();
 // })
 
 const addTodo =(title) =>{
-  todosStore.todos.push({
-    id:todosStore.todos.length+1,
-    title:title,
-    completed:false
-  })
+  todosStore.addTodo(title)
 }
 </script>

@@ -1,14 +1,15 @@
 <script setup>
 import {useRoute} from 'vue-router'
 
-const props = defineProps({
-    todos: Array
-})
+import {todos} from "../stores/todos"
+
+const todosStore = todos();
 
 const route = useRoute()
 
-const filterId = () =>{
-    return props.todos.filter((item) => item.id == route.params.id)
+const todo = () =>{
+    return todosStore.todos.find((item) => item.id == route.params.id)
+    // filter array doner, find object doner
 }
 
 </script>
@@ -17,13 +18,13 @@ const filterId = () =>{
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <h3>{{filterId()}}</h3>
+                <h3>{{todo().id}}</h3>
             </div>
             <div class="card-body">
-                <p>{{filterId()}}</p>
+                <p>{{todo().title}}</p>
             </div>
             <div class="card-footer">
-                <p>{{filterId()}}</p>
+                <p>{{todo().completed}}</p>
             </div>
         </div>
     </div>

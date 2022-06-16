@@ -22,5 +22,16 @@ export const todos = defineStore("todos", {
                 }
             ]
         }
+
     },
+    actions: {
+        addTodo(title) {
+            this.todos.push({
+                id: this.todos.length + 1,
+                title: title,
+                completed: false
+            })
+        },
+    },
+    // actions ekle push islemleri icin
 });
