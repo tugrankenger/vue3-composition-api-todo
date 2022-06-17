@@ -12,9 +12,11 @@
                     {{ todo.title }}
                 </div>
                 <div class="btns d-flex gap-3">
-                    <button  @click="deleteTask(index)" class="btn btn-danger">Delete</button>
+                    <button @click="upTodo(index)" class="btn btn-success">Up</button>
+                    <button @click="downTodo(index)" class="btn btn-secondary">Down</button>
+                    <button @click="deleteTask(index)" class="btn btn-danger">Delete</button>
                     <button @click="editTask(index)" class="btn btn-warning">Edit</button>
-                    <button @click="onDetail(todo.id,index)" class="btn btn-primary">Detail</button>
+                    <button @click="onDetail(todo.id, index)" class="btn btn-primary">Detail</button>
                 </div>
             </li>
         </ul>
@@ -57,13 +59,29 @@ const todosFilter = computed(() => {
     return completed;
 })
 
-const deleteTask = (index) =>{
-    if(confirm('Are you sure?')){
-        todosStore.todos.splice(index,1)
+const upTodo = (index) =>{
+    if(index === 0) return
+
+    todosStore.tempTodo = todosStore.todos[index]
+    todosStore.todos[index] = todosStore.todos[index-1]
+    todosStore.todos[index-1] = todosStore.tempTodo
+}
+
+const downTodo = (index)=>{
+    if(index === todosStore.todos.length-1) return
+
+    todosStore.tempTodo = todosStore.todos[index]
+    todosStore.todos[index] = todosStore.todos[index +1]
+    todosStore.todos[index +1] = todosStore.tempTodo
+}
+
+const deleteTask = (index) => {
+    if (confirm('Are you sure?')) {
+        todosStore.todos.splice(index, 1)
     }
 }
 
-const editTask = (index) =>{
+const editTask = (index) => {
     //console.log(todosStore.todos[index].title)
     todosStore.todos.title = todosStore.todos[index].title
     todosStore.editedTask = index

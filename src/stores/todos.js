@@ -6,6 +6,7 @@ export const todos = defineStore("todos", {
     state: () => {
         return {
             editedTask:null,
+            tempTodo: "",
             todos: [{
                     id: 1,
                     title: "Go to the gym",
@@ -38,6 +39,7 @@ export const todos = defineStore("todos", {
                 })
             }
         }
+        
     },
     // actions ekle push islemleri icin
 });
