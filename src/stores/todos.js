@@ -5,6 +5,7 @@ import {
 export const todos = defineStore("todos", {
     state: () => {
         return {
+            editedTask:null,
             todos: [{
                     id: 1,
                     title: "Go to the gym",
@@ -26,11 +27,16 @@ export const todos = defineStore("todos", {
     },
     actions: {
         addTodo(title) {
-            this.todos.push({
-                id: this.todos.length + 1,
-                title: title,
-                completed: false
-            })
+            if(this.editedTask !=null){
+                this.todos[this.editedTask].title= this.todos.title
+                this.editedTask = null
+            }else{
+                this.todos.push({
+                    id: this.todos.length + 1,
+                    title: title,
+                    completed: false
+                })
+            }
         }
     },
     // actions ekle push islemleri icin

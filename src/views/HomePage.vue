@@ -5,13 +5,17 @@
         </div>
         <h3>Todos:</h3>
         <ul class="list-group">
-            <li v-for="todo in todosFilter" :key="todo.id"
+            <li v-for="(todo, index) in todosFilter" :key="todo.id"
                 class="list-group-item d-flex justify-content-between align-items-center">
                 <div>
                     <input type="checkbox" v-model="todo.completed">
                     {{ todo.title }}
                 </div>
-                <button @click="onDetail(todo.id)" class="btn btn-primary">Detail</button>
+                <div class="btns d-flex gap-3">
+                    <button  @click="deleteTask(index)" class="btn btn-danger">Delete</button>
+                    <button @click="editTask(index)" class="btn btn-warning">Edit</button>
+                    <button @click="onDetail(todo.id,index)" class="btn btn-primary">Detail</button>
+                </div>
             </li>
         </ul>
         <div class="completedInfo d-flex align-items center justify-content-between mx-1 my-2">
@@ -52,6 +56,19 @@ const todosFilter = computed(() => {
     })
     return completed;
 })
+
+const deleteTask = (index) =>{
+    if(confirm('Are you sure?')){
+        todosStore.todos.splice(index,1)
+    }
+}
+
+const editTask = (index) =>{
+    //console.log(todosStore.todos[index].title)
+    todosStore.todos.title = todosStore.todos[index].title
+    todosStore.editedTask = index
+    //console.log(todosStore.editedTask)
+}
 
 const addTodo = (text) => {
     console.log("text in home page", text)
