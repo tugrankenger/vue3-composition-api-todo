@@ -3,29 +3,36 @@
         <div class="new">
             <new @add-todo="addTodo" />
         </div>
-        <h3>Todos:</h3>
-        <ul class="list-group">
-            <li v-for="(todo, index) in todosFilter" :key="todo.id"
-                class="list-group-item d-flex justify-content-between align-items-center">
-                <div>
-                    <input type="checkbox" v-model="todo.completed">
-                    {{ todo.title }}
-                </div>
-                <div class="btns d-flex gap-3">
+        <a-typography-title :level="3">Todos:</a-typography-title>
+        <a-list  style="border: 1px solid hsl(197, 10%, 87%); padding: 20px;">
+            <a-list-item v-for="(todo, index) in todosFilter" :key="todo.id">
+                <a-row type="flex" justify="space-araound" align="middle" style="width:100%">
+                    <a-col flex="20px">
+                        <input type="checkbox" v-model="todo.completed">
+                    </a-col>
+                    <a-col flex="auto">
+                        {{ todo.title }}
+                    </a-col>
+                </a-row>
+                <a-space :size="20">
                     <a-button @click="upTodo(index)" type="text"><UpOutlined /></a-button>
                     <a-button @click="downTodo(index)" type="text" ><DownOutlined /></a-button>
                     <a-button @click="deleteTask(index)" danger>Delete</a-button>
                     <a-button @click="editTask(index)" type="dashed">Edit</a-button>
                     <a-button @click="onDetail(todo.id,index)" type="primary">Detail</a-button>
-                </div>
-            </li>
-        </ul>
-        <div class="completedInfo d-flex align-items center justify-content-between mx-1 my-2">
-            <router-link :to="{ name: 'completedPage' }"><span class="text-primary">Completed items counts:
-                    {{ props.completed }}</span>
-            </router-link>
-            <span class="text-danger">Uncompleted item count: {{ props.unCompleted }}</span>
-        </div>
+                </a-space>
+            </a-list-item>
+        </a-list>
+        <a-row type="flex" justify="space-between" style="margin: 20px 0">
+            <a-col >
+                <router-link :to="{ name: 'completedPage' }">
+                    <a-typography-text type="success">Completed items counts: {{ props.completed }}</a-typography-text>
+                </router-link>
+            </a-col>
+            <a-col>
+                <a-typography-text type="danger">Uncompleted items counts: {{ props.unCompleted }}</a-typography-text>
+            </a-col>
+        </a-row>
         <div class="todo-detail my-3">
             <router-view />
         </div>

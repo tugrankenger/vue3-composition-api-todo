@@ -1,18 +1,22 @@
 <template>
-  <a-layout>
-    <a-row span={24} type="flex" justify="space-around">
+  <a-layout style="background:transparent">
+    <a-layout-header>
+      <a-row  type="flex" justify="space-around">
       <a-list-item >
         <router-link :to="{ name: 'homePage' }" class="btn border text-decoration-none"
           active-class="bg-primary text-white">Todo</router-link>
       </a-list-item>
       <a-list-item>
         <router-link :to="{ name: 'completedPage' }"
-          active-class="bg-primary text-white">Completed</router-link>
+          active-class="danger">Completed</router-link>
       </a-list-item>
     </a-row>
-    <a-col :xs="{span:24, offset:0}" :lg="{span:12, offset:6}">
+    </a-layout-header>
+    <a-layout-content>
+      <a-col :xs="{span:24, offset:0}" :lg="{span:12, offset:6}">
       <router-view @add-todo="addTodo" :completed="completedCount" :unCompleted="unCompletedCount" />
     </a-col>
+    </a-layout-content>
   </a-layout>
 </template>
 

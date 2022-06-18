@@ -1,10 +1,10 @@
 <template>
-    <div class="container">
-        <div class="d-flex align-items-center gap-3 my-3">
-            <label for="">Add Todo:</label>
-            <input type="text" class="" placeholder="Add todo..." @keydown.enter="addTodo" v-model="todosStore.todos.title">
-        </div>
-    </div>
+    <content>
+        <a-row type="flex" flex="2" style="margin: 20px 0">
+            <a-typography :level="4">Add Todo: </a-typography>
+            <input type="text" class="" placeholder="Add todo..." @keydown.enter="addTodo" v-model="todosStore.todos.title" style="margin-left:20px">
+        </a-row>
+    </content>
 </template>
 
 <script setup>
