@@ -1,17 +1,19 @@
 <template>
-  <div class="container">
-    <ul class="list-group bg-light d-flex gap-5 p-2 m-2 align-items-center justify-content-center flex-row">
-      <li class="list-group-item border-0 rounded-0 bg-transparent">
+  <a-layout>
+    <a-row span={24} type="flex" justify="space-around">
+      <a-list-item >
         <router-link :to="{ name: 'homePage' }" class="btn border text-decoration-none"
           active-class="bg-primary text-white">Todo</router-link>
-      </li>
-      <li class="list-group-item border-0 rounded-0 bg-transparent">
-        <router-link :to="{ name: 'completedPage' }" class="btn border text-decoration-none"
+      </a-list-item>
+      <a-list-item>
+        <router-link :to="{ name: 'completedPage' }"
           active-class="bg-primary text-white">Completed</router-link>
-      </li>
-    </ul>
-    <router-view @add-todo="addTodo" :completed="completedCount" :unCompleted="unCompletedCount" />
-  </div>
+      </a-list-item>
+    </a-row>
+    <a-col :xs="{span:24, offset:0}" :lg="{span:12, offset:6}">
+      <router-view @add-todo="addTodo" :completed="completedCount" :unCompleted="unCompletedCount" />
+    </a-col>
+  </a-layout>
 </template>
 
 <script setup>
@@ -48,10 +50,10 @@ const addTodo = (title) => {
   todosStore.addTodo(title)
 }
 
-const completedCount = computed(()=>{
+const completedCount = computed(() => {
   return todosStore.todos.filter((item) => item.completed).length
 })
-const unCompletedCount = computed(()=>{
+const unCompletedCount = computed(() => {
   return todosStore.todos.filter((item) => !item.completed).length
 })
 

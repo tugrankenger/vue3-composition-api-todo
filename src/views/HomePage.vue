@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <content>
         <div class="new">
             <new @add-todo="addTodo" />
         </div>
@@ -12,11 +12,11 @@
                     {{ todo.title }}
                 </div>
                 <div class="btns d-flex gap-3">
-                    <button @click="upTodo(index)" class="btn btn-success">Up</button>
-                    <button @click="downTodo(index)" class="btn btn-secondary">Down</button>
-                    <button @click="deleteTask(index)" class="btn btn-danger">Delete</button>
-                    <button @click="editTask(index)" class="btn btn-warning">Edit</button>
-                    <button @click="onDetail(todo.id, index)" class="btn btn-primary">Detail</button>
+                    <a-button @click="upTodo(index)" type="text"><UpOutlined /></a-button>
+                    <a-button @click="downTodo(index)" type="text" ><DownOutlined /></a-button>
+                    <a-button @click="deleteTask(index)" danger>Delete</a-button>
+                    <a-button @click="editTask(index)" type="dashed">Edit</a-button>
+                    <a-button @click="onDetail(todo.id,index)" type="primary">Detail</a-button>
                 </div>
             </li>
         </ul>
@@ -29,11 +29,12 @@
         <div class="todo-detail my-3">
             <router-view />
         </div>
-    </div>
+    </content>
 </template>
 
 <script setup>
 import New from '../components/New.vue'
+import { DownOutlined, UpOutlined} from '@ant-design/icons-vue'
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { todos } from "../stores/todos"
