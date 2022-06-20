@@ -11,7 +11,8 @@
                         <input type="checkbox" v-model="todo.completed">
                     </a-col>
                     <a-col flex="auto">
-                        {{ todo.title }}
+                        <span v-if="!state.editState">{{ todo.title }}</span>
+                        <input v-if="state.editState && state.editIndex == index" type="text" v-model="todo.title">
                     </a-col>
                 </a-row>
                 <a-space :size="20">
@@ -45,6 +46,7 @@ import { DownOutlined, UpOutlined} from '@ant-design/icons-vue'
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { todos } from "../stores/todos"
+import { reactive } from '@vue/reactivity'
 
 const props = defineProps({
     completed: Number,
@@ -52,10 +54,13 @@ const props = defineProps({
 })
 
 const router = useRouter()
-
 const todosStore = todos();
-
 const emit = defineEmits(['addTodo']);
+
+const state = reactive({
+    editState: false,
+    editIndex : null
+})
 
 const todosFilter = computed(() => {
     let completed = []
@@ -90,9 +95,11 @@ const deleteTask = (index) => {
 }
 
 const editTask = (index) => {
+    state.editIndex = index
+    state.editState = !state.editState
     //console.log(todosStore.todos[index].title)
-    todosStore.todos.title = todosStore.todos[index].title
-    todosStore.editedTask = index
+    // todosStore.todos.title = todosStore.todos[index].title
+    // todosStore.editedTask = index
     //console.log(todosStore.editedTask)
 }
 
